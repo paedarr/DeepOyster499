@@ -29,7 +29,7 @@ conda  activate  skorch-env<br>
 python  -m  pip  install  -r  requirements.txt<br>
 python  -m  pip  install  .`<br>
 <li>Install with pip:</li>
-`python  -m  pip  install  -U  skorch</code>
+<code>python  -m  pip  install  -U  skorch</code>
 </ul>
 <li>Latest version of Python (3.12)</li>
 <li><em>This section is subject to changes</em></li>
