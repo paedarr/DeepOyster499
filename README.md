@@ -27,7 +27,7 @@ conda  create  -n  skorch-env  python=3.10<br>
 conda  activate  skorch-env<br>
 # install pytorch version for your system (see below)<br>
 python  -m  pip  install  -r  requirements.txt<br>
-python  -m  pip  install  .`<br>
+python  -m  pip  install  .</code>
 <li>Install with pip:</li>
 <code>python  -m  pip  install  -U  skorch</code>
 </ul>
