@@ -13,15 +13,20 @@
 <li>PyTorch
 <ul>
 <li>Install with Conda:</li>
-`conda install pytorch torchvision -c pytorch`
+```
+conda install pytorch torchvision -c pytorch
+```
 <li>Install with pip:</li>
-`pip3 install torch torchvision`
+```
+pip3 install torch torchvision
+```
 </ul>
 </li>
 <li>Skorch (NN Dependency)</li>
 <ul>
 <li>Install with Conda:</li>
-`git  clone  https://github.com/skorch-dev/skorch.git<br>
+```
+git  clone  https://github.com/skorch-dev/skorch.git<br>
 cd  skorch<br>
 conda  create  -n  skorch-env  python=3.10<br>
 conda  activate  skorch-env<br>
@@ -31,7 +36,8 @@ install pytorch version for your system (see below)
 python  -m  pip  install  -r  requirements.txt<br>
 python  -m  pip  install  .`<br>
 <li>Install with pip:</li>
-`python  -m  pip  install  -U  skorch`
+`python  -m  pip  install  -U  skorch
+```
 </ul>
 <li>Latest version of Python (3.12)</li>
 <li><em>This section is subject to changes</em></li>
