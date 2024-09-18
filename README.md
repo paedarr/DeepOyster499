@@ -1,6 +1,6 @@
 # Deep Learning Research - COMP 499<br><sub><sup>Drew Davinack (PhD), Mark LeBlanc (PhD), Avery Chan, Paedar Rader, Sayed Ibrahimi</sup></sub>
 
-![Oyster with some mud blister infection](./master/static_images/cover-image.jpg)
+![Oyster with some mud blister infection](./master/static_images/Aug9.png)
 
 <p>This project is a study of the health of oysters, specifically the infestation of mud blisters from burrowing worms, to build an image recognition model that can accurately predict how much surface area of an oyster is infected with the parasites. <em>This section is a work in progress.</em></p>
 
