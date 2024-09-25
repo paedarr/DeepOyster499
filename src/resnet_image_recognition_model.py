@@ -51,9 +51,9 @@ for param in model.parameters():
     param.requires_grad = False
 
 # gets all the different possible classes of information from previous layers and constructs 
-# and reduces it to the last layer of four classses (severity 1-4)
+# and reduces it to the last layer of four classses (severity 0-4)
 num_features = model.fc.in_features
-model.fc = nn.Linear(num_features, 4)
+model.fc = nn.Linear(num_features, 5)
 
 
 # Define loss and optimizer
