@@ -148,16 +148,20 @@ def show_images_predictions(dataloader):
         # Have the model make the prediction
         with torch.no_grad():
             output = model(images)
-        _, predicted_class = output.max(1)
+        _, predicted_classes = output.max(1)
 
         # Display the image and its predicted and actual labels
-        plt.imshow(images[0].permute(1, 2, 0))  # Convert tensor to image
-        plt.title(f'Predicted: {predicted_class.item()}, Actual: {labels[0]}')
-        plt.axis('off')
-        plt.show()
+        for i in range(images.size(0)):
+            # Denormalize the image
+            img = images[i].cpu().numpy().transpose((1, 2, 0))
+            img = img * np.array([0.229, 0.224, 0.225]) + np.array([0.485, 0.456, 0.406])
+            img = np.clip(img, 0, 1)
+            plt.imshow(img)  # Convert tensor to image
+            plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i]}')
+            plt.show()
 
 show_images_predictions(val_loader)
 
 
 # Save the model
-torch.save(model.state_dict(), 'resnet50_mud_blisters.pth')
+torch.save(model.state_dict(), 'src/testingModals/resnet50_mud_blisters.pth')
