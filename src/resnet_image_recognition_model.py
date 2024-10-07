@@ -139,17 +139,18 @@ def validate_model(model, val_loader):
 # Train the model using our frain function
 train_model(model, criterion, optimizer, train_loader, val_loader, num_epochs=10)
 
+# set the model to evaluation mode 
 model.eval()
 
 # Function to display image, prediction, and label
 def show_images_predictions(dataloader):
     for images, labels in dataloader:
-        # Make the prediction
+        # Have the model make the prediction
         with torch.no_grad():
             output = model(images)
         _, predicted_class = output.max(1)
 
-        # Display the image
+        # Display the image and its predicted and actual labels
         plt.imshow(images[0].permute(1, 2, 0))  # Convert tensor to image
         plt.title(f'Predicted: {predicted_class.item()}, Actual: {labels[0]}')
         plt.axis('off')
