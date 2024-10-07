@@ -7,6 +7,7 @@ from torchvision import models
 from torch.utils.data import DataLoader
 from torch.optim import Adam
 import matplotlib.pyplot as plt
+import numpy as np
 
 # transforms, resizes, flips, rotates, and normalizes the images then converts them into tensors 
 # so it can go into the model
@@ -137,6 +138,24 @@ def validate_model(model, val_loader):
 
 # Train the model using our frain function
 train_model(model, criterion, optimizer, train_loader, val_loader, num_epochs=10)
+
+model.eval()
+
+# Function to display image, prediction, and label
+def show_images_predictions(dataloader):
+    for images, labels in dataloader:
+        # Make the prediction
+        with torch.no_grad():
+            output = model(images)
+        _, predicted_class = output.max(1)
+
+        # Display the image
+        plt.imshow(images[0].permute(1, 2, 0))  # Convert tensor to image
+        plt.title(f'Predicted: {predicted_class.item()}, Actual: {labels[0]}')
+        plt.axis('off')
+        plt.show()
+
+show_images_predictions(val_loader)
 
 
 # Save the model
