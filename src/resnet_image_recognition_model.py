@@ -157,7 +157,16 @@ def show_images_predictions(dataloader):
             img = img * np.array([0.229, 0.224, 0.225]) + np.array([0.485, 0.456, 0.406])
             img = np.clip(img, 0, 1)
             plt.imshow(img)  # Convert tensor to image
-            plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i]}')
+
+            # checking to see if the model prediction and the actual label match so the plot can be saved in the right directory
+            # for model analysis
+            if predicted_classes[i].item() == labels[i]:
+                plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i]}', color = 'green')
+                plt.savefig('src/correctSeverityPrediction/oyster' + i)
+            else:
+                plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i]}', color = 'red')
+                plt.savefig('src/wrongSeverityPrediction/oyster' + i)
+
             plt.show()
 
 show_images_predictions(val_loader)
