@@ -160,12 +160,12 @@ def show_images_predictions(dataloader):
 
             # checking to see if the model prediction and the actual label match so the plot can be saved in the right directory
             # for model analysis
-            if predicted_classes[i].item() == labels[i]:
-                plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i]}', color = 'green')
-                plt.savefig('src/correctSeverityPrediction/oyster' + i)
+            if predicted_classes[i].item() == labels[i].item():
+                plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i].item()}', color='green')
+                plt.savefig(f'src/correctSeverityPrediction/oyster_{i}.jpg')
             else:
-                plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i]}', color = 'red')
-                plt.savefig('src/wrongSeverityPrediction/oyster' + i)
+                plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i].item()}', color='red')
+                plt.savefig(f'src/wrongSeverityPrediction/oyster_{i}.jpg')
 
             plt.show()
 
