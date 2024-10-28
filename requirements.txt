@@ -1,0 +1,5 @@
+torch==2.5.0
+os<=3.13
+torchvision<=0.20
+matplotlib<=3.9.2
+numpy<=2.1
