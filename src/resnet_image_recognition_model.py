@@ -13,9 +13,11 @@ import numpy as np
 # so it can go into the model
 train_transforms = transforms.Compose([
     transforms.Resize((224, 224)),
-    transforms.RandomHorizontalFlip(),
-    transforms.RandomRotation(10),
+    # transforms.RandomHorizontalFlip(),
+    # transforms.RandomRotation(10),
     transforms.ToTensor(),
+    # Normalize the image with mean and standard deviation for each channel (R, G, B)
+    # The mean and standard deviation values are precomputed for the ImageNet dataset
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
 
@@ -30,8 +32,12 @@ val_transforms = transforms.Compose([
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # gets the directory path of where the validation and train dataset are
-train_data_dir = os.path.join(script_dir, '../dataset/train')
-val_data_dir = os.path.join(script_dir, '../dataset/validation')
+# train_data_dir = os.path.join(script_dir, '../dataset/train')
+# val_data_dir = os.path.join(script_dir, '../dataset/validation')
+
+# Augmented dataset paths
+train_data_dir = os.path.join(script_dir, '../aug_dataset/train')
+val_data_dir = os.path.join(script_dir, '../aug_dataset/validation')
 
 # Create datasets from the image directories and transforms them
 train_dataset = torchvision.datasets.ImageFolder(root=train_data_dir, transform=train_transforms)
@@ -144,10 +150,11 @@ model.eval()
 
 # Function to display image, prediction, and label
 def show_images_predictions(dataloader):
+    image_count = 0  # Counter to keep track of the number of images processed
     for images, labels in dataloader:
         # Have the model make the prediction
         with torch.no_grad():
-            output = model(images)
+            output = model(images.to(device))
         _, predicted_classes = output.max(1)
 
         # Display the image and its predicted and actual labels
@@ -162,15 +169,17 @@ def show_images_predictions(dataloader):
             # for model analysis
             if predicted_classes[i].item() == labels[i].item():
                 plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i].item()}', color='green')
-                plt.savefig(f'src/correctSeverityPrediction/oyster_{i}.jpg')
+                plt.savefig(f'src/aug_correct_severity_predic/oyster_{image_count}.jpg')
             else:
                 plt.title(f'Predicted: {predicted_classes[i].item()}, Actual: {labels[i].item()}', color='red')
-                plt.savefig(f'src/wrongSeverityPrediction/oyster_{i}.jpg')
+                plt.savefig(f'src/aug_incorrect_severity_predic/oyster_{image_count}.jpg')
 
-            plt.show()
+            image_count += 1  # Increment the counter
+
+            #plt.show()
 
 show_images_predictions(val_loader)
 
 
 # Save the model
-torch.save(model.state_dict(), 'src/testingModals/resnet50_mud_blisters.pth')
+torch.save(model.state_dict(), 'src/trainedModal/resnet50_mud_blisters.pth')
