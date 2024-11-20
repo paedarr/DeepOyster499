@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader
 from torch.optim import Adam
 import matplotlib.pyplot as plt
 import numpy as np
+from resnet_test import test_model
 
 # transforms, resizes, flips, rotates, and normalizes the images then converts them into tensors 
 # so it can go into the model
@@ -38,6 +39,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # Augmented dataset paths
 train_data_dir = os.path.join(script_dir, '../aug_dataset/train')
 val_data_dir = os.path.join(script_dir, '../aug_dataset/validation')
+test_data_dir = os.path.join(script_dir, '../aug_dataset/test')
 
 # Create datasets from the image directories and transforms them
 train_dataset = torchvision.datasets.ImageFolder(root=train_data_dir, transform=train_transforms)
@@ -183,3 +185,20 @@ show_images_predictions(val_loader)
 
 # Save the model
 torch.save(model.state_dict(), 'src/trainedModal/resnet50_mud_blisters.pth')
+
+# loading the saved model and setting it to evaluation mode for testing
+model = torch.load("trainedModal/resnet50_mud_blisters.pth")
+model.eval()
+
+# transformations for the images so it can be put into the model
+test_transforms = transforms.Compse([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+])
+
+# Load the test data 
+test_data = torchvision.datasets.ImageFolder(root=test_data_dir, transform=test_transforms) 
+test_loader = DataLoader(test_data, batch_size=32, shuffle=False) 
+
+# Test the model 
+test_model(model, test_loader)
