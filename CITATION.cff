@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Davinack"
+  given-names: "Drew"
+- family-names: "LeBlanc"
+  given-names: "Mark"
+- family-names: "Rader"
+  given-names: "Paedar"
+- family-names: "Chan"
+  given-names: "Avery"
+- family-names: "Ibrahimi"
+  given-names: "Sayed"
+title: "Deep Oyster 499"
+version: 0.1.0
+date-released: 2024-12-4
+url: "https://github.com/paedarr/DeepOyster499"
