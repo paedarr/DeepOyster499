@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>COMP499 - Deep Learning</title>
+
+    <script src="script.js"></script>
+    
+
+    <!-- Use CDN links instead of node_modules -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.1.0/css/xterm.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.1.0/lib/xterm.js"></script>
+</head>
+<body>
+    <div class="banner">
+        <img src="DeepOysterLogo.png" id="bannerImg" alt="DeepOyster Banner Logo Image">
+    </div>
+
+    <div class="main_container">
+        <div class="main_section">
+            <div class="image_block">
+                <div class="drop_container">
+                    <input type="file" id = "imageUpload" name="userPhoto" style = "display: block; margin: auto;" accept="image/*">
+                    <img src = "./" id = "imagePreview">
+                </div>
+            </div>
+            <div class="info_block">
+                <button id = "run_btn">Run Program</button>
+                <button id = "dwn_btn">Download</button>
+                <div id="terminal"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var term = new Terminal();
+            term.open(document.getElementById('terminal'));
+            term.write('\x1B[1;3;31mCOMP499>debug\x1B[0m $ ');
+        });
+    </script>
+</body>
+</html>
