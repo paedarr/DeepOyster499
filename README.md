@@ -39,13 +39,16 @@ python  -m  pip  install  .</code>
 
 ### Usage of Resnet-50:
 -- Resnet-50 -- 
+<br>
 @article{He2015,
 	author = {Kaiming He and Xiangyu Zhang and Shaoqing Ren and Jian Sun},
 	title = {Deep Residual Learning for Image Recognition},
 	journal = {arXiv preprint arXiv:1512.03385},
 	year = {2015}
 }
+<br>
 
 * Corresponding Repo: *
+<br>
 
 https://github.com/KaimingHe/deep-residual-networks
