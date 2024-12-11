@@ -7,9 +7,10 @@ def test_model(model, test_loader):
     
     with torch.no_grad(): 
         for images, labels in test_loader: 
-            outputs = model(images) 
-            _, predicted = torch.max(outputs.data, 1) 
+            output = model(images)                   
+            _, predicted = output.max(1) 
             total += labels.size(0) 
             correct += (predicted == labels).sum().item() 
+            print("the label is: ", labels, "the predicted is: ", predicted)
             print(f'Accuracy of the model on the test images: {100 * correct / total}%') 
             

@@ -37,8 +37,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # val_data_dir = os.path.join(script_dir, '../dataset/validation')
 
 # Augmented dataset paths
-train_data_dir = os.path.join(script_dir, '../aug_dataset/train')
-val_data_dir = os.path.join(script_dir, '../aug_dataset/validation')
+train_data_dir = os.path.join(script_dir, '../dataset/train')
+val_data_dir = os.path.join(script_dir, '../dataset/validation')
 test_data_dir = os.path.join(script_dir, '../aug_dataset/test')
 
 # Create datasets from the image directories and transforms them
@@ -186,19 +186,32 @@ show_images_predictions(val_loader)
 # Save the model
 torch.save(model.state_dict(), 'src/trainedModal/resnet50_mud_blisters.pth')
 
-# loading the saved model and setting it to evaluation mode for testing
-model = torch.load("trainedModal/resnet50_mud_blisters.pth")
-model.eval()
-
 # transformations for the images so it can be put into the model
-test_transforms = transforms.Compse([
+test_transforms = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
 ])
 
-# Load the test data 
-test_data = torchvision.datasets.ImageFolder(root=test_data_dir, transform=test_transforms) 
-test_loader = DataLoader(test_data, batch_size=32, shuffle=False) 
+# the directory path of where the test directory
+test_data_dir = os.path.join(script_dir, '../dataset/test')
+
+# Load the test data
+test_dataset = torchvision.datasets.ImageFolder(root=test_data_dir, transform=test_transforms) 
+test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False) 
+
+# loading the saved model
+model = models.resnet50()
+
+# gets the original Res-Net50 model and changes the output features to 5 classes
+# to symbolize the 5 severity levels of mudblister oysters
+num_features = model.fc.in_features
+model.fc = nn.Linear(num_features, 5)
+
+# loading the saved model from above that has the saved learning weights
+model.load_state_dict(torch.load("src/trainedModal/resnet50_mud_blisters.pth", weights_only=True))
+
+# set the model to evaluation mode for testing
+model.eval()
 
 # Test the model 
 test_model(model, test_loader)
